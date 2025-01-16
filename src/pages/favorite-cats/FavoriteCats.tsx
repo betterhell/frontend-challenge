@@ -9,6 +9,7 @@ const FavoriteCats: React.FC = React.memo(() => {
     <div className=" flex my-[52px] gap-12 flex-wrap">
       {favoriteCats.map((cat: Cat) => (
         <div
+          onClick={() => handleFavorite(cat)}
           className="group transition-all cursor-pointer hover:drop-shadow-lg relative"
           key={cat.id}
         >

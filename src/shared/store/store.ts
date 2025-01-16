@@ -5,6 +5,7 @@ import axios from "axios";
 interface StoreProps {
   cats: Cat[] | [];
   favoriteCats: Cat[] | [];
+  isLoading: boolean;
   getCats: () => void;
   handleFavorite: (cat: Cat) => void;
 }
@@ -12,9 +13,12 @@ interface StoreProps {
 export const useStore = create<StoreProps>((set, getState) => ({
   cats: [],
   favoriteCats: [],
+  isLoading: true,
 
-  getCats: () => {
-    axios
+  getCats: async () => {
+    set({ isLoading: true });
+
+    await axios
       .get("https://api.thecatapi.com/v1/images/search?limit=20", {
         headers: {
           "x-api-key":
@@ -24,9 +28,13 @@ export const useStore = create<StoreProps>((set, getState) => ({
       .then((res) =>
         set((state) => ({
           cats: [...state.cats, ...res.data],
+          isLoading: false,
         }))
       )
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        set({ isLoading: false });
+        console.log(err);
+      });
   },
 
   handleFavorite: (cat) => {

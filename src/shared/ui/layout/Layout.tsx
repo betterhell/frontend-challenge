@@ -6,10 +6,10 @@ import Header from "../../../widgets/header/Header.tsx";
 import { useStore } from "../../store/store.ts";
 
 const Layout: React.FC = React.memo(() => {
-  const { setCats } = useStore();
+  const { getCats } = useStore();
 
   useEffect(() => {
-    setCats();
+    getCats();
   }, []);
 
   return (
