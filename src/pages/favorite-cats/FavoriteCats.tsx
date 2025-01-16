@@ -10,7 +10,7 @@ const FavoriteCats: React.FC = React.memo(() => {
       {favoriteCats.map((cat: Cat) => (
         <div
           onClick={() => handleFavorite(cat)}
-          className="group transition-all cursor-pointer hover:drop-shadow-lg relative"
+          className="hover:scale-110 group transition-all cursor-pointer hover:drop-shadow-lg relative"
           key={cat.id}
         >
           <img className="w-[255px] aspect-square" src={cat.url} alt="Котик" />
